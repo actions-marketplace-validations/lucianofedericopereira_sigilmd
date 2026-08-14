@@ -657,15 +657,8 @@
   .hero-inner { display: flex; align-items: center; justify-content: center; gap: 56px; flex-wrap: wrap; }
   .hero-text { flex: 1 1 380px; max-width: 560px; min-width: 0; }
   .logo { font-size: 4.125rem; line-height: 1; }
-  /* Sized in em (square viewBox) so it scales automatically with whichever
-     .logo font-size context it's in (nav desktop/mobile, hero) without
-     needing separate width/height per breakpoint. currentColor keeps it
-     working with .nav .brand's existing hover color-shift/wobble for free. */
-  .logo-edit {
-    width: 0.78em; height: 0.78em; display: inline-block; vertical-align: -0.08em;
-    fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
-  }
-  .logo-edit--sm { width: 0.85em; height: 0.85em; }
+  .brand-logo { height: 1.3em; width: auto; display: inline-block; vertical-align: -0.32em; }
+  .brand-logo--sm { height: 1.05em; vertical-align: -0.24em; }
   /* Two-point fluid scale: same min/max as before, but anchored at explicit
      breakpoints (400px small-phone -> 1280px desktop, matching the nav's own
      max-width) instead of wherever a bare Xvw slope happened to land. Formula:

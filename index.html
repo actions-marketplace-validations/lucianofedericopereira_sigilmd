@@ -21,7 +21,7 @@ try {
 <meta name="twitter:card" content="summary" />
 <meta name="theme-color" content="#f8fafc" media="(prefers-color-scheme: light)" />
 <meta name="theme-color" content="#0b1220" media="(prefers-color-scheme: dark)" />
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%E2%9C%8F%EF%B8%8F%3C/text%3E%3C/svg%3E" />
+<link rel="icon" type="image/png" href="assets/sigilmd.png" />
 <link rel="stylesheet" href="assets/site.css" />
 <link rel="stylesheet" href="assets/palettes.css" />
 <link rel="stylesheet" href="assets/locale.css" />
@@ -35,10 +35,6 @@ try {
 <body data-github-repo="lucianofedericopereira/sigilmd">
 
 <svg style="position:absolute; width:0; height:0; overflow:hidden" aria-hidden="true">
-  <symbol id="icon-edit" viewBox="0 0 24 24">
-    <path d="M12 20h9" />
-    <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4Z" />
-  </symbol>
   <symbol id="icon-external" viewBox="0 0 24 24">
     <path d="M7 17 17 7" />
     <path d="M8 7h9v9" />
@@ -241,7 +237,7 @@ try {
 
 <nav class="nav" aria-label="Primary">
   <div class="wrap">
-    <a class="brand notranslate" href="#top"><span class="logo"><svg class="logo-edit" aria-hidden="true"><use href="#icon-edit"/></svg></span> sigilmd</a>
+    <a class="brand notranslate" href="#top"><img class="brand-logo" src="assets/sigilmd.png" alt="sigilmd" /></a>
     <div class="links" id="nav-links">
       <a class="link i18n" href="#how"><span data-i18n-default>How it works</span><span data-locale="es" class="notranslate">Cómo funciona</span><span data-locale="it" class="notranslate">Come funziona</span></a>
       <a class="link i18n" href="#grammar"><span data-i18n-default>Grammar</span><span data-locale="es" class="notranslate">Gramática</span><span data-locale="it" class="notranslate">Grammatica</span></a>
@@ -288,7 +284,7 @@ try {
 
 <header class="hero" id="top">
   <div class="wrap">
-    <span class="logo" style="display:block; margin:0 auto 12px;"><svg class="logo-edit" aria-hidden="true" style="width:1em; height:1em;"><use href="#icon-edit"/></svg></span>
+    <img src="assets/sigilmd.png" alt="sigilmd" style="display:block; margin:0 auto 24px; width:min(420px, 80%); height:auto;" />
     <p class="eyebrow i18n"><span data-i18n-default>Perl · No dependencies</span><span data-locale="es" class="notranslate">Perl · Sin dependencias</span><span data-locale="it" class="notranslate">Perl · Nessuna dipendenza</span></p>
     <h1 class="i18n"><span data-i18n-default>Insert file contents and values, generated straight into your README</span><span data-locale="es" class="notranslate">Inserta contenidos de archivos y valores, generados directamente en tu README</span><span data-locale="it" class="notranslate">Inserisci contenuti di file e valori, generati direttamente nel tuo README</span></h1>
     <p class="tagline i18n"><span data-i18n-default>Drop a marker comment in your Markdown, run one script (or the GitHub Action), and get file contents or config-defined values spliced back into the file in place — no template language.</span><span data-locale="es" class="notranslate">Coloca un comentario marcador en tu Markdown, ejecuta un script (o la GitHub Action), y obtén contenidos de archivos o valores definidos en la configuración empalmados de vuelta en el archivo, en su lugar — sin lenguaje de plantillas.</span><span data-locale="it" class="notranslate">Inserisci un commento marcatore nel tuo Markdown, esegui uno script (o la GitHub Action), e ottieni contenuti di file o valori definiti nella configurazione innestati di nuovo nel file, al loro posto — senza linguaggio di template.</span></p>
@@ -388,7 +384,7 @@ license = "MIT"
       <a class="i18n" href="docs.html"><span data-i18n-default>Docs</span><span data-locale="es" class="notranslate">Documentación</span><span data-locale="it" class="notranslate">Documentazione</span></a><span class="no-print"> ·</span>
       <a class="i18n" href="changelog.html"><span data-i18n-default>Changelog</span><span data-locale="es" class="notranslate">Cambios</span><span data-locale="it" class="notranslate">Modifiche</span></a>
     </p>
-    <p class="muted"><span class="no-print notranslate"><svg class="logo-edit logo-edit--sm" aria-hidden="true"><use href="#icon-edit"/></svg> sigilmd · by </span><a class="notranslate" href="https://github.com/lucianofedericopereira">Luciano Federico Pereira</a></p>
+    <p class="muted"><span class="no-print notranslate"><img class="brand-logo brand-logo--sm" src="assets/sigilmd.png" alt="" aria-hidden="true" /> sigilmd · by </span><a class="notranslate" href="https://github.com/lucianofedericopereira">Luciano Federico Pereira</a></p>
   </div>
 </footer>
 
