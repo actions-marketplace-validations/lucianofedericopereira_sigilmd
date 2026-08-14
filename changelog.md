@@ -2,6 +2,14 @@
 
 Every release, as it ships. This page is generated automatically from changelog.md — edit the markdown and reload to update it.
 
+## 0.2.0 — August 15, 2026
+
+- Fixed table/reference markers hard-erroring whenever a file also contained `sigilbadges`' own `badge:` / `badge-row:` markers — both tools share the same `<!--[[ ]]-->` bracket syntax with no namespace, so `sigilmd` now recognizes and skips sigilbadges' (unambiguous, colon-prefixed) marker shapes instead of dying on it
+- Fixed `uses: lucianofedericopereira/sigilmd@v1` pins in the README that never matched any real tag — the actual published tag is `v0.1`; rewrote the "Publishing to Marketplace" section to describe the direct-tag-pin flow this project actually uses pre-1.0
+- Replaced the placeholder pencil-icon brand mark (nav, hero, footer, favicon) with the real `sigilmd.png` logo across the site
+- Added a "Read the Docs" badge, matching the shared style used by sigilbadges/treegen2 (GitHub logo, `for-the-badge`, centered under the top logo)
+- Reworked the README's marker-grammar "Example" section into a real before/after: the "after" half is now shown rendered rather than as a second code block, since that's what a reader actually sees on the page
+
 ## 0.1.0 — August 13, 2026
 
 - Added `sigilmd.pl`: a single core-Perl script that scans a Markdown file for `<!--[[ name ]]-->` table declarations and `<!--[[ $table.key ]]-->` / `<!--[[ @table.key ]]-->` reference markers and splices the resolved values or file contents back in place — no template language, no CPAN dependencies

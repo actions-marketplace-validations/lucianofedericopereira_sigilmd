@@ -92,6 +92,15 @@ for my $m (@markers) {
     elsif ($raw =~ /^\@?(?:\$$ident\.$ident)+$/) {
         $m->{type} = 'reference';
     }
+    elsif ($raw =~ /^badge(?:-row)?:/ || $raw =~ /^badge-row$/) {
+        # sigilbadges' own marker syntax (<!--[[ badge: ... ]]--> / <!--[[
+        # badge-row: ... ]]-->) shares this exact <!--[[ ]]--> bracket
+        # convention with no namespace to tell tools apart. Left untouched
+        # -- unlike the fallback below, this shape is unambiguous (sigilmd
+        # has no colon-prefixed marker of its own), so skipping it can't
+        # mask a real sigilmd typo.
+        $m->{type} = 'foreign';
+    }
     else {
         my $hint = ($raw =~ /^$ident\.$ident$/) ? " -- did you mean '\$$raw'?" : '';
         die "sigilmd: unrecognized marker '<!--[[ $raw ]]-->'$hint\n";
