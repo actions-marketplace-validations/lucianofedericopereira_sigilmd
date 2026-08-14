@@ -142,9 +142,20 @@ reader sees on the rendered page — just the generated text:
 
 Current version: <!-- [[ $config.version ]] -->1.4.2<!--/-->
 
+*— begin `assets/intro.md` —*
+
 <!-- [[ @$file.dir$intro.name ]] -->
 This project does exactly one thing and has done it the same way since 2026.
 <!--/-->
+
+*— end `assets/intro.md` —*
+
+The first line resolves `$config.version` and inserts it as literal text.
+The second is a **file** reference: `$file.dir` ("assets/") and
+`$intro.name` ("intro.md") concatenate to the path `assets/intro.md`, and
+because the marker starts with `@`, `sigilmd` reads that file from disk and
+splices in its contents — the sentence above is the actual contents of
+`assets/intro.md`, not hand-typed text.
 
 The table declarations aren't shown live above: a declare block's body
 sits on its *own* lines between the opening and closing marker, so it
