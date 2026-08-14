@@ -134,23 +134,11 @@ Current version: <!-- [[ $config.version ]] -->
 <!-- [[ @$file.dir$intro.name ]] -->
 ```
 
-**After** — what `sigilmd` writes back, shown rendered rather than as a code
-block: every marker lives inside an HTML comment, so this is also exactly
-what a reader sees on the rendered page — table declarations and marker
-syntax vanish, leaving only the two lines of generated text:
-
-<!-- [[ config ]] -->
-version = "1.4.2"
-license = "MIT"
-<!--/-->
-
-<!-- [[ file ]] -->
-dir = "assets/"
-<!--/-->
-
-<!-- [[ intro ]] -->
-name = "intro.md"
-<!--/-->
+**After** — the two reference markers, shown rendered rather than as a code
+block. GitHub only hides a `<!-- -->` comment on the line where it *both*
+opens and closes, and a resolved reference marker is exactly that
+(`<!-- [[ ... ]] -->generated text<!--/-->`), so this is exactly what a
+reader sees on the rendered page — just the generated text:
 
 Current version: <!-- [[ $config.version ]] -->1.4.2<!--/-->
 
@@ -158,11 +146,17 @@ Current version: <!-- [[ $config.version ]] -->1.4.2<!--/-->
 This project does exactly one thing and has done it the same way since 2026.
 <!--/-->
 
-Table declarations are untouched; only the two reference markers gained
-content and a closing `<!--/-->`. Running `sigilmd` again on the "after"
-file is a no-op — it's already up to date. (This exact before/after pair is
-`t/fixtures/demo/`, checked byte-for-byte in CI, so the docs can't drift
-from actual behavior.)
+The table declarations aren't shown live above: a declare block's body
+sits on its *own* lines between the opening and closing marker, so it
+doesn't get the same one-line treatment and would render as plain visible
+text (`version = "1.4.2"` etc.) if pasted in unfenced here. That's also why
+tables you don't want visible on the page belong in an external `config`
+TOML file instead of inline (see "External config" below) — inline
+declarations are the trade-off you make for keeping everything in one file.
+
+Running `sigilmd` again on the fully-applied file is a no-op — it's already
+up to date. (This exact before/after pair is `t/fixtures/demo/`, checked
+byte-for-byte in CI, so the docs can't drift from actual behavior.)
 
 (The extra space after `<!--` and before `-->` above keeps these
 illustrative snippets from being picked up as real markers — the scanner
