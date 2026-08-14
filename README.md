@@ -203,6 +203,27 @@ Every input has a sensible default; the smallest useful config is just
 Exits non-zero without writing anything if regenerating `README.md` would
 produce a different file than what's committed.
 
+## Publishing to the GitHub Marketplace
+
+The action is Marketplace-ready: [`action.yml`](action.yml) lives at the
+repo root with a `name`, `description`, and `branding` (icon `edit-3` on a
+`blue` background — this project's own brand color, carried through to the
+README badges and project-structure tree above).
+
+1. Push the repo **public**.
+2. Create a release — tag it `v1.0.0`. On the release page, tick **"Publish
+   this Action to the GitHub Marketplace"**, accept the agreement, and
+   choose categories (e.g. _Documentation_, _Utilities_).
+3. Move a floating **`v1`** tag to the release so consumers can pin
+   `uses: lucianofedericopereira/sigilmd@v1`:
+
+   ```bash
+   git tag -fa v1 -m "sigilmd v1" && git push origin v1 --force
+   ```
+
+> Marketplace requires the action **`name`** to be unique across all
+> listings. If the current name in `action.yml` is taken, tweak it.
+
 ## License
 
 MIT
