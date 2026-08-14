@@ -134,9 +134,11 @@ Current version: <!-- [[ $config.version ]] -->
 <!-- [[ @$file.dir$intro.name ]] -->
 ```
 
-**After** — what `sigilmd` writes back:
+**After** — what `sigilmd` writes back, shown rendered rather than as a code
+block: every marker lives inside an HTML comment, so this is also exactly
+what a reader sees on the rendered page — table declarations and marker
+syntax vanish, leaving only the two lines of generated text:
 
-```
 <!-- [[ config ]] -->
 version = "1.4.2"
 license = "MIT"
@@ -155,7 +157,6 @@ Current version: <!-- [[ $config.version ]] -->1.4.2<!--/-->
 <!-- [[ @$file.dir$intro.name ]] -->
 This project does exactly one thing and has done it the same way since 2026.
 <!--/-->
-```
 
 Table declarations are untouched; only the two reference markers gained
 content and a closing `<!--/-->`. Running `sigilmd` again on the "after"
