@@ -1,0 +1,91 @@
+name: 'sigilmd'
+description: 'Insert file contents and config-defined values into README.md via marker comments -- no template language, no dependencies.'
+author: 'Luciano Federico Pereira'
+
+branding:
+  icon: 'edit-3'
+  color: 'blue'
+
+inputs:
+  file:
+    description: 'Path to the markdown file to process.'
+    required: false
+    default: 'README.md'
+  config:
+    description: 'Path to an external TOML file of additional tables. Optional -- tables can also be declared inline in the file itself.'
+    required: false
+    default: ''
+  check:
+    description: 'If true, fail instead of writing when the file is out of date. Use in CI to gate on stale docs.'
+    required: false
+    default: 'false'
+  commit:
+    description: 'Commit and push the changes back to the branch.'
+    required: false
+    default: 'true'
+  commit-message:
+    description: 'Commit message used when `commit` is true.'
+    required: false
+    default: 'docs: update generated content [skip ci]'
+  commit-user-name:
+    description: 'Git user.name for the commit.'
+    required: false
+    default: 'github-actions[bot]'
+  commit-user-email:
+    description: 'Git user.email for the commit.'
+    required: false
+    default: 'github-actions[bot]@users.noreply.github.com'
+
+outputs:
+  changed:
+    description: "'true' if the file was updated."
+    value: ${{ steps.sigilmd.outputs.changed }}
+
+runs:
+  using: 'composite'
+  steps:
+    # No "Set up Perl" step: GitHub-hosted runners ship a system Perl, and
+    # this tool has no CPAN dependencies to install.
+    - name: Run sigilmd
+      id: sigilmd
+      shell: bash
+      working-directory: ${{ github.workspace }}
+      env:
+        ACTION_PATH: ${{ github.action_path }}
+        INPUT_FILE: ${{ inputs.file }}
+        INPUT_CONFIG: ${{ inputs.config }}
+        INPUT_CHECK: ${{ inputs.check }}
+      run: |
+        set -euo pipefail
+        echo "::group::perl -v"
+        perl -v
+        echo "::endgroup::"
+        args=(--file "$INPUT_FILE")
+        [ -n "$INPUT_CONFIG" ] && args+=(--config "$INPUT_CONFIG")
+        [ "$INPUT_CHECK" = "true" ] && args+=(--check)
+        perl "$ACTION_PATH/sigilmd.pl" "${args[@]}"
+        if git status --porcelain -- "$INPUT_FILE" | grep -q .; then
+          echo "changed=true" >> "$GITHUB_OUTPUT"
+        else
+          echo "changed=false" >> "$GITHUB_OUTPUT"
+        fi
+
+    - name: Commit changes
+      if: ${{ inputs.commit == 'true' && inputs.check != 'true' && steps.sigilmd.outputs.changed == 'true' }}
+      shell: bash
+      working-directory: ${{ github.workspace }}
+      env:
+        COMMIT_MESSAGE: ${{ inputs.commit-message }}
+        COMMIT_USER_NAME: ${{ inputs.commit-user-name }}
+        COMMIT_USER_EMAIL: ${{ inputs.commit-user-email }}
+      run: |
+        set -euo pipefail
+        git config user.name "$COMMIT_USER_NAME"
+        git config user.email "$COMMIT_USER_EMAIL"
+        git add -A
+        if git diff --cached --quiet; then
+          echo "sigilmd: nothing to commit"
+          exit 0
+        fi
+        git commit -m "$COMMIT_MESSAGE"
+        git push
