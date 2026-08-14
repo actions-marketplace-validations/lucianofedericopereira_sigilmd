@@ -77,9 +77,13 @@ jobs:
 
       - name: Stage a fixture workspace
         run: |
-          mkdir -p work/assets
+          # sigilmd resolves @-paths relative to its cwd (github.workspace),
+          # not relative to the target file -- so intro.md must land at
+          # <workspace>/assets/, not work/assets/, even though README.md
+          # itself is staged under work/ to avoid clobbering the real one.
+          mkdir -p work assets
           cp t/fixtures/demo/README.before.md work/README.md
-          cp t/fixtures/demo/assets/intro.md work/assets/intro.md
+          cp t/fixtures/demo/assets/intro.md assets/intro.md
 
       - name: Run sigilmd via the composite action
         uses: ./

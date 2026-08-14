@@ -1,4 +1,4 @@
-<img src="assets/sigilmd.png" alt="sigilmd">
+<p align="center"><img src="assets/sigilmd.png" alt="sigilmd" width="420"></p>
 
 # sigilmd
 
@@ -113,6 +113,29 @@ target file and the external config is a hard error.
 
 ## Example
 
+**Before** — what you write:
+
+```
+<!-- [[ config ]] -->
+version = "1.4.2"
+license = "MIT"
+<!--/-->
+
+<!-- [[ file ]] -->
+dir = "assets/"
+<!--/-->
+
+<!-- [[ intro ]] -->
+name = "intro.md"
+<!--/-->
+
+Current version: <!-- [[ $config.version ]] -->
+
+<!-- [[ @$file.dir$intro.name ]] -->
+```
+
+**After** — what `sigilmd` writes back:
+
 ```
 <!-- [[ config ]] -->
 version = "1.4.2"
@@ -133,6 +156,12 @@ Current version: <!-- [[ $config.version ]] -->1.4.2<!--/-->
 This project does exactly one thing and has done it the same way since 2026.
 <!--/-->
 ```
+
+Table declarations are untouched; only the two reference markers gained
+content and a closing `<!--/-->`. Running `sigilmd` again on the "after"
+file is a no-op — it's already up to date. (This exact before/after pair is
+`t/fixtures/demo/`, checked byte-for-byte in CI, so the docs can't drift
+from actual behavior.)
 
 (The extra space after `<!--` and before `-->` above keeps these
 illustrative snippets from being picked up as real markers — the scanner

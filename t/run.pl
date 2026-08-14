@@ -8,7 +8,7 @@ use File::Temp qw(tempdir);
 use File::Copy qw(copy);
 use File::Basename qw(dirname);
 use Cwd qw(abs_path getcwd);
-use Test::More;
+use Test::More qw(no_plan);
 
 my $root   = abs_path(dirname(__FILE__) . '/..');
 my $script = "$root/sigilmd.pl";
@@ -143,8 +143,6 @@ for my $name (sort keys %config_error_cases) {
     isnt($status, 0, "exits non-zero: $name");
     like($out, $case->{expect}, "error message: $name");
 }
-
-done_testing();
 
 # --- helpers ---
 
