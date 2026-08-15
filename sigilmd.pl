@@ -101,6 +101,12 @@ for my $m (@markers) {
         # mask a real sigilmd typo.
         $m->{type} = 'foreign';
     }
+    elsif ($raw =~ /^pdf(?:-gallery)?:/) {
+        # pdf-preview's own marker syntax (<!--[[ pdf: ... ]]--> / <!--[[
+        # pdf-gallery: ... ]]-->) -- same rationale as the badge: case
+        # above: unambiguous, sigilmd has no marker starting with 'pdf'.
+        $m->{type} = 'foreign';
+    }
     else {
         my $hint = ($raw =~ /^$ident\.$ident$/) ? " -- did you mean '\$$raw'?" : '';
         die "sigilmd: unrecognized marker '<!--[[ $raw ]]-->'$hint\n";

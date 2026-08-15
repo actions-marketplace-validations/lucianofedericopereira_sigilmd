@@ -2,6 +2,10 @@
 
 Every release, as it ships. This page is generated automatically from changelog.md — edit the markdown and reload to update it.
 
+## 0.2.1 — August 15, 2026
+
+- Fixed table/reference markers hard-erroring whenever a file also contained the new `pdf-preview` sibling's own `pdf:` / `pdf-gallery:` markers — same `<!--[[ ]]-->` bracket-sharing issue already fixed for sigilbadges in 0.2.0, now closed for the fourth project in the suite too
+
 ## 0.2.0 — August 15, 2026
 
 - Fixed table/reference markers hard-erroring whenever a file also contained `sigilbadges`' own `badge:` / `badge-row:` markers — both tools share the same `<!--[[ ]]-->` bracket syntax with no namespace, so `sigilmd` now recognizes and skips sigilbadges' (unambiguous, colon-prefixed) marker shapes instead of dying on it
